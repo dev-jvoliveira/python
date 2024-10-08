@@ -40,17 +40,17 @@ class CalculatorGui:
 
                 if button_text == 'C':
                     button.bind('<Button-1>', self.clear_display)
-                    button.config(bg='#EA4335', fg='#fff')
+                    button.config(bg='#EA4335', fg='#000')
 
                 if button_text in '0123456789.+-/*()^':
                     button.bind('<Button-1>', self.add_text_to_display)
 
                 if button_text == '=':
                     button.bind('<Button-1>', self.calculate)
-                    button.config(bg='#4785F4', fg='#fff')
+                    button.config(bg='#4785F4', fg='#000')
 
     def calculate(self, event=None) -> None:
-        """Solve equations"""
+        """resolvendo equações"""
         equation = self.display.get()
 
         try:
@@ -65,10 +65,10 @@ class CalculatorGui:
             self.label.config(text='Conta inválida')
 
     def add_text_to_display(self, event=None) -> None:
-        """Add text to display"""
+        """adicionando texto ao visour"""
         self.display.insert('end', event.widget['text'])
         self.display.focus()
 
     def clear_display(self, event=None) -> None:
-        """Clear display"""
+        """limpando o visor"""
         self.display.delete(0, 'end')
