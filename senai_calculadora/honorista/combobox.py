@@ -1,12 +1,13 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 
 def calcular_salario():
     try:
         horas_aula = float(entry_horas.get())
         valor_hora = float(entry_valor.get())
+        tipo_professor = combo_tipo.get()
         
-        if honorista_var.get() == 1:  # Honorista
+        if tipo_professor == "Honorista":  # Honorista
             salario = horas_aula * valor_hora
         else:  # Professor
             salario = (horas_aula * valor_hora) * 1.25
@@ -19,20 +20,18 @@ def limpar():
     entry_horas.delete(0, tk.END)
     entry_valor.delete(0, tk.END)
     label_resultado.config(text="")
+    combo_tipo.set("Honorista")  # Resetar para o valor padrão
 
 # Criação da janela principal
 root = tk.Tk()
 root.title("Calculadora de Salário")
 
-# Variáveis para o input radio
-honorista_var = tk.IntVar(value=1)
-
-# Botões de opção
-radio_honorista = tk.Radiobutton(root, text="Honorista", variable=honorista_var, value=1)
-radio_honorista.pack()
-
-radio_professor = tk.Radiobutton(root, text="Professor", variable=honorista_var, value=2)
-radio_professor.pack()
+# Combobox para selecionar tipo
+label_tipo = tk.Label(root, text="Selecione o tipo:")
+label_tipo.pack()
+combo_tipo = ttk.Combobox(root, values=["Honorista", "Professor"])
+combo_tipo.set("Honorista")  # Valor padrão
+combo_tipo.pack()
 
 # Entradas de texto
 label_horas = tk.Label(root, text="Digite a quantidade de horas/aula:")
